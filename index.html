@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Aura 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffd6e7, #ffeef5);
+  text-align: center;
+  overflow: hidden;
+}.container { margin-top: 60px; }
+
+h1 { color: #ff4da6; } h2 { color: #ff66b2; }
+
+button { margin: 10px; padding: 12px 25px; border: none; border-radius: 25px; background: #ff66b2; color: white; font-size: 16px; cursor: pointer; }
+
+.card { background: white; margin: 20px; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+
+.hidden { display: none; }
+
+/* animasi teks */ .typing span { opacity: 0; animation: fadeIn 0.05s forwards; }
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* bunga */ .flower { position: absolute; font-size: 20px; animation: fall linear infinite; }
+
+@keyframes fall { 0% {transform: translateY(-10%);} 100% {transform: translateY(110vh);} } </style>
+
+</head><body><div id="page1" class="container">
+  <h1>🎉 Happy Birthday 🎉</h1>
+  <h2>Aura Aseng 💖</h2>  <p>Pilih ya 😏 (tapi sebenarnya cuma ada 1 pilihan wkwk)</p><button onclick="openGift()">Buka Hadiah 🎁</button> <button onclick="force()">Nggak Mau ❌</button>
+
+</div><div id="page2" class="hidden container">
+  <h1 id="hbAnim"></h1>  <div class="card hidden" id="finalMsg">
+    <p id="typingText"></p>
+  </div>
+</div><audio id="music">
+  <source src="https://files.catbox.moe/6k5l9p.mp3" type="audio/mpeg">
+</audio><audio id="popSound">
+  <source src="https://www.soundjay.com/buttons/sounds/button-4.mp3" type="audio/mpeg">
+</audio><script>
+function openGift() {
+  document.getElementById("popSound").play().catch(()=>{});
+  document.getElementById("music").play().catch(()=>{});
+
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
+
+  startHB();
+}
+
+function force() {
+  alert("Ih sok nolak 😏 padahal harus dibuka juga 😜");
+}
+
+function startHB() {
+  let text = "🎉 Happy Birthday Aura 🎉";
+  let container = document.getElementById("hbAnim");
+  container.innerHTML = "";
+
+  text.split("").forEach((char, i) => {
+    let span = document.createElement("span");
+    span.textContent = char;
+    span.style.opacity = 0;
+    setTimeout(() => {
+      span.style.opacity = 1;
+    }, i * 80);
+    container.appendChild(span);
+  });
+
+  setTimeout(showMessage, 3000);
+}
+
+function showMessage() {
+  let msg = `Yeyy Aura sekarang 15 tahun 😆✨\n\nSemoga makin cantik (udah pasti 😏), makin lucu, makin rajin (ayo 😤), dan makin bahagia 💕\n\nJangan sering ngambek ya 😜 tapi kalau ngambek juga tetep lucu sih 🧸🌸\n\nSemoga semua impian kamu tercapai 🎯✨\n\nDari: Abil 😎`;
+
+  let container = document.getElementById("typingText");
+  let card = document.getElementById("finalMsg");
+  card.classList.remove("hidden");
+
+  container.innerHTML = "";
+
+  msg.split("").forEach((char, i) => {
+    let span = document.createElement("span");
+    span.textContent = char;
+    span.style.animationDelay = i * 0.03 + "s";
+    container.appendChild(span);
+  });
+}
+
+// bunga
+for(let i=0;i<30;i++){
+  let f=document.createElement("div");
+  f.innerHTML=Math.random()>0.5?"🌸":"✨";
+  f.className="flower";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(3+Math.random()*5)+"s";
+  document.body.appendChild(f);
+}
+</script></body>
+</html>
